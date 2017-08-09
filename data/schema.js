@@ -55,7 +55,7 @@ type Action {
   responsible: Person 
   type: ActionType
   completionPercentage: Int  
-  observations: [OBSERVATION]    
+  observations: [Observation]    
 }
 enum ActionType {
   BLOCKING_ACTION
@@ -66,14 +66,14 @@ enum ActionType {
   CORRECTIVE_ACTIONS_NOT_NECESSARY    
 }
 type Query {
-  person(id: Int): Person
+  observation(id: Int): Observation
 }
 `;
 
 // @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
-//export default makeExecutableSchema({ typeDefs, resolvers });
-export default makeExecutableSchema({ typeDefs });
+export default makeExecutableSchema({ typeDefs, resolvers });
+//export default makeExecutableSchema({ typeDefs });
 
 /*
 type Author {

@@ -11,8 +11,8 @@ export default function seedDb(db){
   db.sync({ force: true }).then(() => {
     _.times(10, () => {
       return Observation.create({
-        evidence: casual.sentences(n = 2),
-        requirement: casual.sentences(n = 2),
+        evidence: casual.sentences(2),
+        requirement: casual.sentences(2),
         type: casual.random_element(ObservationType),
         //date: casual.date,
         status: casual.random_element(ObservationStatus),

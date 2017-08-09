@@ -2,20 +2,25 @@ import { Observation, Unit, Person, AuditReport, ActionPlan, Action } from './co
 
 const resolvers = {
   Query: {
-    author(_, args) {
-      return Author.find({ where: args });
+    observation(_, args) {
+      return Observation.find({ where: args });
     },
   },
-  Author: {
-    posts(author) {
-      return author.getPosts();
-    },
-  },
-  Post: {
-    author(post) {
-      return post.getAuthor();
-    },
+  Observation: {
+    unit(observation) { return observation.getUnit(); },
   },
 };
 
 export default resolvers;
+/*
+ Author: {
+ posts(author) {
+ return author.getPosts();
+ },
+ },
+ Post: {
+ author(post) {
+ return post.getAuthor();
+ },
+ },
+ */
