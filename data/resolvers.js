@@ -1,4 +1,4 @@
-import { Author } from './connectors';
+import { Observation, Unit, Person, AuditReport, ActionPlan, Action } from './connectors';
 
 const resolvers = {
   Query: {

@@ -7,8 +7,7 @@ type Observation {
   evidence: String
   requirement: Requirement
   type: ObservationType
-  unit: Unit  
-  date: Date  
+  unit: Unit    
   auditor: Person
   actions: [Action]
   status: ObservationStatus    
@@ -44,22 +43,18 @@ type Requirement {
 type AuditReport {
   id:Int
   observations: [Observation]
-  isApproved: Boolean
-  approvalDate: Date
+  isApproved: Boolean  
 }
 type ActionPlan {
   id: Int
   actions:[Action]
-  isApproved: Boolean
-  approvalDate: Date
+  isApproved: Boolean  
 }
 type Action {
-  deadline: Date
   description: String
   responsible: Person 
   type: ActionType
-  completionPercentage: Int
-  actualDueDate: Date
+  completionPercentage: Int  
   observations: [OBSERVATION]    
 }
 enum ActionType {
@@ -70,8 +65,17 @@ enum ActionType {
   IMPROVE_ACTION
   CORRECTIVE_ACTIONS_NOT_NECESSARY    
 }
+type Query {
+  person(id: Int): Person
+}
+`;
 
+// @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
+//export default makeExecutableSchema({ typeDefs, resolvers });
+export default makeExecutableSchema({ typeDefs });
+
+/*
 type Author {
   id: Int
   firstName: String
@@ -85,11 +89,9 @@ type Post {
   views: Int
   author: Author
 }
-type Query {
-  author(firstName: String, lastName: String): Author
-  getFortuneCookie: String
-}
-`;
-//Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
-export default makeExecutableSchema({ typeDefs, resolvers });
+ type Query {
+ author(firstName: String, lastName: String): Author
+ getFortuneCookie: String
+ }
+*/
