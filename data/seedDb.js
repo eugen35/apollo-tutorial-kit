@@ -7,28 +7,33 @@ casual.seed(123);
 //@todo /6/ Можно ведь и генерить наполнение моделей автоматически, основываясь на инстроспекции
 //casual.array_of_words(n = 7)
 export default function seedDb(db){
-  const Observation = db.models.Observation;
+  const { Observation, Unit } = db.models;
   db.sync({ force: true }).then(() => {
-    _.times(10, () => {
-      return Observation.create({
-        evidence: casual.sentences(2),
-        requirement: casual.sentences(2),
-        type: casual.random_element(ObservationType),
-        //date: casual.date,
-        status: casual.random_element(ObservationStatus),
-      })//.then((author) => {
-        //return author.createPost({     //Да, есть такой синтаксис в sequelize: к имени модели (с заглавной буквы) спереди пишется create, add, get или set и т.п. Но есть и без таких слеплений синтаксис - тот что можно сгенерировать
-         // title: `A post by ${author.firstName}`,
-          //text: casual.sentences(3),
-        //});
-      //});
+    seedUnits(Unit).then((units) => {
+      _.times(10, () => {
+        return Observation.create({
+          evidence: casual.sentences(2),
+          requirement: casual.sentences(2),
+          type: casual.random_element(ObservationType),
+          // date: casual.date,
+          status: casual.random_element(ObservationStatus),
+        }).then((observation) => {
+          return observation.setUnit(casual.random_element(units));
+        });
+      });
     });
   });
 }
 
+// @returns {Promise} - промис на создание в БД unita
+function seedUnits(Unit) {
+  return Promise.all(UnitNames.map((unitName) => Unit.create({ name: unitName })));
+}
+
+
 const ObservationType = [
-  'NONCONFORMANCE MAJOR',
-  'NONCONFORMANCE MINOR',
+  'NONCONFORMANCE_MAJOR',
+  'NONCONFORMANCE_MINOR',
   'RECOMMENDATION',
 ];
 const ObservationStatus = [
@@ -44,4 +49,11 @@ const ActionType = [
   'MITIGATION',
   'IMPROVE_ACTION',
   'CORRECTIVE_ACTIONS_NOT_NECESSARY',
+];
+
+const UnitNames = [
+  'Marketing Dept',
+  'Production Dept',
+  'Sales Dept',
+  'Service Dept',
 ];

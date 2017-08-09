@@ -3,7 +3,11 @@ import { Observation, Unit, Person, AuditReport, ActionPlan, Action } from './co
 const resolvers = {
   Query: {
     observation(_, args) {
-      return Observation.find({ where: args });
+      return Observation.find({ where: args }).then((concreteObservation) => {
+        //concreteObservation.type = { observationType: concreteObservation.type };
+        return concreteObservation;
+      });
+      // return Observation.find({ where: args });
     },
   },
   Observation: {

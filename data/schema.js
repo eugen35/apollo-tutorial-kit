@@ -13,8 +13,8 @@ type Observation {
   status: ObservationStatus    
 }
 enum ObservationType {
-  NONCONFORMANCE MAJOR
-  NONCONFORMANCE MINOR
+  NONCONFORMANCE_MAJOR
+  NONCONFORMANCE_MINOR
   RECOMMENDATION  
 }
 enum ObservationStatus {  
