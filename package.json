@@ -30,7 +30,9 @@
     "body-parser": "^1.17.2",
     "casual": "^1.5.14",
     "express": "4.13.4",
+    "graphql-iso-date": "^3.2.0",
     "graphql-tools": "^1.0.0",
+    "graphql-type-json": "^0.1.4",
     "lodash": "^4.17.4",
     "sequelize": "^4.4.2",
     "sqlite": "^2.8.0"

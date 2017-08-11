@@ -1,10 +1,14 @@
 import { makeExecutableSchema } from 'graphql-tools';
+import GraphQLJSON from 'graphql-type-json';
+import { GraphQLDate } from 'graphql-iso-date';
 import resolvers from './resolvers';
 
 const typeDefs = `
+scalar Date
 type Observation {
   id: Int
   evidence: String
+  date: Date
   requirement: Requirement
   type: ObservationType
   unit: Unit    
@@ -43,7 +47,7 @@ type Requirement {
 type AuditReport {
   id:Int
   observations: [Observation]
-  isApproved: Boolean  
+  isApproved: Boolean
 }
 type ActionPlan {
   id: Int
@@ -72,7 +76,7 @@ type Query {
 
 // @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
-export default makeExecutableSchema({ typeDefs, resolvers });
+export default makeExecutableSchema({ typeDefs, resolvers: { ... resolvers, Date: GraphQLDate } });
 //export default makeExecutableSchema({ typeDefs });
 
 /*

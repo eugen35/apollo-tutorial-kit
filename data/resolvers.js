@@ -12,6 +12,7 @@ const resolvers = {
   },
   Observation: {
     unit(observation) { return observation.getUnit(); },
+    auditor(observation) { return observation.getPerson(); },
   },
 };
 
