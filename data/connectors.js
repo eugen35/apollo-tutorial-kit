@@ -8,7 +8,7 @@ const db = new Sequelize('blog', null, null, {
 
 const Observation = db.define('Observation', {
   evidence: { type: Sequelize.STRING },
-  date: {type: Sequelize.DATEONLY},
+  date: { type: Sequelize.DATEONLY },
   requirement: { type: Sequelize.STRING }, // Здесь будем JSON-хранить. Зачем отдельная таблица?
   type: { type: Sequelize.STRING },
   //date: { type: Sequelize.DATE },

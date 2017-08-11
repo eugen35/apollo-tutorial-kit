@@ -1,10 +1,10 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import GraphQLJSON from 'graphql-type-json';
 import { GraphQLDate } from 'graphql-iso-date';
 import resolvers from './resolvers';
 
 const typeDefs = `
 scalar Date
+scalar JSON
 type Observation {
   id: Int
   evidence: String

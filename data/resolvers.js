@@ -13,6 +13,7 @@ const resolvers = {
   Observation: {
     unit(observation) { return observation.getUnit(); },
     auditor(observation) { return observation.getPerson(); },
+    requirement(observation) { console.log(JSON.stringify(observation.requirement)); return JSON.parse(observation.requirement); },
   },
 };
 

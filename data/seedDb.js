@@ -13,7 +13,15 @@ export default function seedDb(db) {
         return Observation.create({
           evidence: casual.sentences(2),
           date: casual.date('YYYY-MM-DD'),
-          requirement: casual.sentences(2),
+          requirement: JSON.stringify({
+            normativeDocument: casual.random_element([
+              'ISO 9001:2015', 'ISO 14001:2015', 'OHSAS 18001:2007'
+            ]),
+            clause: casual.random_element([
+              '4.1', '4.2', '5.1', '5.2', '5.3', '6.1', '7.1', '7.2', '7.3', '8.1', '9.1', '10.1'
+            ]),
+            quote: casual.sentences(2),
+          }),
           type: casual.random_element(ObservationType),
           // date: casual.date,
           status: casual.random_element(ObservationStatus),
