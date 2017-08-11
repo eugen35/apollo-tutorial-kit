@@ -2,18 +2,20 @@ import { Observation, Unit, Person, AuditReport, ActionPlan, Action } from './co
 
 const resolvers = {
   Query: {
-    observation(_, args) {
-      return Observation.find({ where: args }).then((concreteObservation) => {
-        //concreteObservation.type = { observationType: concreteObservation.type };
-        return concreteObservation;
-      });
-      // return Observation.find({ where: args });
+    observations(_, args) { // Возвращает все найденные observation
+      // raw: true тут писать не нужно, т.к. если далее мы попросим связанные модели
+      // например, unit, то ничего не выйдет - у чистого json уже нет метода getUnit()
+      return Observation.findAll({ where: args });
+    },
+    observation(_, args) { // Возвращает один observation
+      console.log(args);
+        return Observation.find({ where: args });
     },
   },
   Observation: {
     unit(observation) { return observation.getUnit(); },
     auditor(observation) { return observation.getPerson(); },
-    requirement(observation) { console.log(JSON.stringify(observation.requirement)); return JSON.parse(observation.requirement); },
+    requirement(observation) { return JSON.parse(observation.requirement); },
   },
 };
 

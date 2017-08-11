@@ -71,6 +71,7 @@ enum ActionType {
 }
 type Query {
   observation(id: Int): Observation
+  observations(id: Int): [Observation]  
 }
 `;
 
