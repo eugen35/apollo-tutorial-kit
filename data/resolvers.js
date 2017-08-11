@@ -10,9 +10,10 @@ const resolvers = {
       // @todo /3/ Может, нужно использовать input type?
       return Observation.findAll({ where: JSON.parse(args.params) });
     },
-    observation(_, args) { // Возвращает один observation
-      return Observation.find({ where: args });
-    },
+    // Возвращает один observation
+    observation(_, args) { return Observation.find({ where: args }); },
+    units(_, args) { return Unit.findAll({ where: args }); },
+    persons(_, args) { return Person.findAll({ where: args }); },
   },
   Observation: {
     unit(observation) { return observation.getUnit(); },

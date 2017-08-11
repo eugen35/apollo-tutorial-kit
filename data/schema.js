@@ -69,9 +69,11 @@ enum ActionType {
   IMPROVE_ACTION
   CORRECTIVE_ACTIONS_NOT_NECESSARY    
 }
-type Query {
+type Query {  
   observation(id: Int): Observation
-  observations(params: String): [Observation]  
+  observations(params: String): [Observation]
+  units(id: Int): [Unit]  
+  persons(id: Int): [Person]  
 }
 `;
 
