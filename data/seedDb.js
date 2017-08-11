@@ -6,11 +6,12 @@ casual.seed(123);
 
 // @todo /6/ Можно ведь и генерить наполнение моделей автоматически, основываясь на инстроспекции
 export default async function seedDb(db) {
-  const { Observation, Unit, Person } = db.models;
+  const { Observation, Unit, Person, Action } = db.models;
   await db.sync({ force: true });
   const units = await seedUnits(Unit);
   const persons = await seedPersons(Person);
-  await seedObservations({ Observation, units, persons });
+  const observations = await seedObservations({ Observation, units, persons });
+  const actions = await seedActions({ Action, persons });
 }
 
 // @returns {Promise[]} - промис на массив созданных в БД unitов
@@ -25,8 +26,8 @@ function seedPersons(Person) {
   })));
 }
 
-// @returns {Promise[]} - промис на массив созданных в БД observations. Которые уже связаны с unit и person
-function seedObservations({ Observation, units, persons }){
+// @returns {Promise[]} - промис на массив созданных в БД observations
+function seedObservations ({ Observation, units, persons }) {
   return Promise.all(_.times(10, () => Observation.create({
     evidence: casual.sentences(2),
     date: casual.date('YYYY-MM-DD'),
@@ -42,11 +43,23 @@ function seedObservations({ Observation, units, persons }){
     type: casual.random_element(ObservationType),
     // date: casual.date,
     status: casual.random_element(ObservationStatus),
-  }).then((observation) => {
+  }).then((observation) => { //После создания привяжем к нему person и unit
     observation.setUnit(casual.random_element(units));
     observation.setPerson(casual.random_element(persons));
   })
   ));
+}
+
+// @returns {Promise[]} - промис на массив созданных в БД актионс
+function seedActions({ Action, persons }) {
+  return Promise.all(_.times(20, () => Action.create({
+    description: casual.sentence,
+    type: casual.random_element(ActionType),
+    completionPercentage: Math.round(casual.random * 100),
+    //observations: [Observation]
+  }).then((action) => { //После создания привяжем к нему person
+    action.setPerson(casual.random_element(persons));
+  })));
 }
 
 const ObservationType = [

@@ -52,6 +52,7 @@ Observation.belongsTo(Person);
 Observation.belongsToMany(Action, { through: 'ObservationAction' });
 Action.belongsToMany(Observation, { through: 'ObservationAction' });
 
+Action.belongsTo(Person);
 AuditReport.hasMany(Observation);
 ActionPlan.hasMany(Action);
 

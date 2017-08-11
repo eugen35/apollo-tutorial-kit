@@ -14,11 +14,15 @@ const resolvers = {
     observation(_, args) { return Observation.find({ where: args }); },
     units(_, args) { return Unit.findAll({ where: args }); },
     persons(_, args) { return Person.findAll({ where: args }); },
+    actions(_, args) { return Action.findAll({ where: args }); },
   },
   Observation: {
     unit(observation) { return observation.getUnit(); },
     auditor(observation) { return observation.getPerson(); },
     requirement(observation) { return JSON.parse(observation.requirement); },
+  },
+  Action: {
+      responsible(action) { return action.getPerson(); },
   },
 };
 

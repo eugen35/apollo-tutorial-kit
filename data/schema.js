@@ -59,7 +59,7 @@ type Action {
   responsible: Person 
   type: ActionType
   completionPercentage: Int  
-  observations: [Observation]    
+  observations: [Observation]      
 }
 enum ActionType {
   BLOCKING_ACTION
@@ -73,7 +73,8 @@ type Query {
   observation(id: Int): Observation
   observations(params: String): [Observation]
   units(id: Int): [Unit]  
-  persons(id: Int): [Person]  
+  persons(id: Int): [Person]
+  actions(id: Int): [Action]  
 }
 `;
 
