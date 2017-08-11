@@ -5,11 +5,10 @@ const resolvers = {
     observations(_, args) { // Возвращает все найденные observation
       // raw: true тут писать не нужно, т.к. если далее мы попросим связанные модели
       // например, unit, то ничего не выйдет - у чистого json уже нет метода getUnit()
-      return Observation.findAll({ where: args });
+        return Observation.findAll({ where: JSON.parse(args.params) });
     },
     observation(_, args) { // Возвращает один observation
-      console.log(args);
-        return Observation.find({ where: args });
+      return Observation.find({ where: args });
     },
   },
   Observation: {
