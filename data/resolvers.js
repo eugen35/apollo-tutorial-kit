@@ -5,7 +5,10 @@ const resolvers = {
     observations(_, args) { // Возвращает все найденные observation
       // raw: true тут писать не нужно, т.к. если далее мы попросим связанные модели
       // например, unit, то ничего не выйдет - у чистого json уже нет метода getUnit()
-        return Observation.findAll({ where: JSON.parse(args.params) });
+      // Почему-то если в schema применять библиотечку с типом JSON, чтобы передать сюда JSON
+      // то args будет равно {params: false}. Может это особенность библиотечки?
+      // @todo /3/ Может, нужно использовать input type?
+      return Observation.findAll({ where: JSON.parse(args.params) });
     },
     observation(_, args) { // Возвращает один observation
       return Observation.find({ where: args });
