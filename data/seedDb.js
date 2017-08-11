@@ -5,13 +5,12 @@ import _ from 'lodash';
 casual.seed(123);
 
 // @todo /6/ Можно ведь и генерить наполнение моделей автоматически, основываясь на инстроспекции
-export default function seedDb(db) {
+export default async function seedDb(db) {
   const { Observation, Unit, Person } = db.models;
-  db.sync({ force: true }).then(() => {
-    Promise.all([seedUnits(Unit), seedPersons(Person)]).then(([units, persons]) => {
-      seedObservations({ Observation, units, persons });
-    });
-  });
+  await db.sync({ force: true });
+  const units = await seedUnits(Unit);
+  const persons = await seedPersons(Person);
+  await seedObservations({ Observation, units, persons });
 }
 
 // @returns {Promise[]} - промис на массив созданных в БД unitов
