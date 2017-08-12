@@ -15,6 +15,8 @@ const resolvers = {
     units(_, args) { return Unit.findAll({ where: args }); },
     persons(_, args) { return Person.findAll({ where: args }); },
     actions(_, args) { return Action.findAll({ where: args }); },
+    auditReports(_, args) { return AuditReport.findAll({ where: args }); },
+    actionPlans(_, args) { return ActionPlan.findAll({ where: args }); },
   },
   Observation: {
     unit(observation) { return observation.getUnit(); },
@@ -22,20 +24,14 @@ const resolvers = {
     requirement(observation) { return JSON.parse(observation.requirement); },
   },
   Action: {
-      responsible(action) { return action.getPerson(); },
+    responsible(action) { return action.getPerson(); },
+  },
+  AuditReport: {
+    observations(auditReport) { return auditReport.getObservations(); },
+  },
+  ActionPlan: {
+    actions(actionPlan) { return actionPlan.getActions(); },
   },
 };
 
 export default resolvers;
-/*
- Author: {
- posts(author) {
- return author.getPosts();
- },
- },
- Post: {
- author(post) {
- return post.getAuthor();
- },
- },
- */

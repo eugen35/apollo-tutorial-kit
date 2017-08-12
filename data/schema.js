@@ -48,11 +48,13 @@ type AuditReport {
   id:Int
   observations: [Observation]
   isApproved: Boolean
+  approvalDate: Date
 }
 type ActionPlan {
   id: Int
   actions:[Action]
-  isApproved: Boolean  
+  isApproved: Boolean
+  approvalDate: Date  
 }
 type Action {
   description: String
@@ -75,6 +77,8 @@ type Query {
   units(id: Int): [Unit]  
   persons(id: Int): [Person]
   actions(id: Int): [Action]  
+  auditReports(id: Int): [AuditReport]  
+  actionPlans(id: Int): [ActionPlan]  
 }
 `;
 

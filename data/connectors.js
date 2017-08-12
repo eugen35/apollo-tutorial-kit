@@ -11,7 +11,6 @@ const Observation = db.define('Observation', {
   date: { type: Sequelize.DATEONLY },
   requirement: { type: Sequelize.STRING }, // Здесь будем JSON-хранить. Зачем отдельная таблица?
   type: { type: Sequelize.STRING },
-  //date: { type: Sequelize.DATE },
   status: { type: Sequelize.STRING },
 });
 
@@ -28,12 +27,12 @@ const Person = db.define('Person', {
 
 const AuditReport = db.define('AuditReport', {
   isApproved: { type: Sequelize.BOOLEAN },
-  //approvalDate: { type: Sequelize.DATE },
+  approvalDate: { type: Sequelize.DATEONLY },
 });
 
 const ActionPlan = db.define('ActionPlan', {
   isApproved: { type: Sequelize.BOOLEAN },
-  //approvalDate: { type: Sequelize.DATE },
+  approvalDate: { type: Sequelize.DATEONLY },
 });
 
 const Action = db.define('Action', {
