@@ -12,7 +12,6 @@ export default async function seedDb(db) {
   const persons = await seedPersons(Person);
   const observations = await seedObservations({ Observation, units, persons });
   const actions = await seedActions({ Action, persons });
-  console.log(actions);
   await seedAuditReports({ AuditReport, observations });
   await seedActionPlans({ ActionPlan, actions });
 }

@@ -57,6 +57,7 @@ type ActionPlan {
   approvalDate: Date  
 }
 type Action {
+  id: Int
   description: String
   responsible: Person 
   type: ActionType
