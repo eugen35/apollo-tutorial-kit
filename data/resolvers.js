@@ -21,10 +21,12 @@ const resolvers = {
   Observation: {
     unit(observation) { return observation.getUnit(); },
     auditor(observation) { return observation.getPerson(); },
+    actions(observation) { return observation.getActions(); },
     requirement(observation) { return JSON.parse(observation.requirement); },
   },
   Action: {
     responsible(action) { return action.getPerson(); },
+    observations(action) { return action.getObservations(); },
   },
   AuditReport: {
     observations(auditReport) { return auditReport.getObservations(); },
