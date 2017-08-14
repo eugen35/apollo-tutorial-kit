@@ -33,6 +33,9 @@ type Unit {
   subordinated: Unit
   manages: [Unit]  
 }
+input UnitInput {  
+  name: String    
+}
 type Person {
   id: Int
   firstName: String
@@ -81,30 +84,11 @@ type Query {
   auditReports(id: Int): [AuditReport]  
   actionPlans(id: Int): [ActionPlan]  
 }
+type Mutation {
+  addUnit(input: UnitInput): Unit
+}
 `;
 
 // @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
 export default makeExecutableSchema({ typeDefs, resolvers: { ... resolvers, Date: GraphQLDate } });
-//export default makeExecutableSchema({ typeDefs });
-
-/*
-type Author {
-  id: Int
-  firstName: String
-  lastName: String
-  posts: [Post]
-}
-type Post {
-  id: Int
-  title: String
-  text: String
-  views: Int
-  author: Author
-}
-
- type Query {
- author(firstName: String, lastName: String): Author
- getFortuneCookie: String
- }
-*/

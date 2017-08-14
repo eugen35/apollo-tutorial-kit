@@ -34,6 +34,11 @@ const resolvers = {
   ActionPlan: {
     actions(actionPlan) { return actionPlan.getActions(); },
   },
+  Mutation: {
+    addUnit(_, args) {
+      return Unit.create(args.input);
+    },
+  },
 };
 
 export default resolvers;
