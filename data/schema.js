@@ -86,6 +86,7 @@ type Query {
 }
 type Mutation {
   addUnit(input: UnitInput): Unit
+  updateUnit(id: Int, input: UnitInput): Unit
 }
 `;
 

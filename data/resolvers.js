@@ -35,9 +35,8 @@ const resolvers = {
     actions(actionPlan) { return actionPlan.getActions(); },
   },
   Mutation: {
-    addUnit(_, args) {
-      return Unit.create(args.input);
-    },
+    addUnit(_, args) { return Unit.create(args.input); },
+    updateUnit(_, { id, input }) { return Unit.update(input, { where: { id } }); },
   },
 };
 
