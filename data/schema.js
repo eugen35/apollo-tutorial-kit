@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { GraphQLDate } from 'graphql-iso-date';
 import resolvers from './resolvers';
 
-const typeDefs = `
+const queryDefs = `
 scalar Date
 scalar JSON
 type Observation {
@@ -32,9 +32,6 @@ type Unit {
   name: String
   subordinated: Unit
   manages: [Unit]  
-}
-input UnitInput {  
-  name: String    
 }
 type Person {
   id: Int
@@ -84,12 +81,30 @@ type Query {
   auditReports(id: Int): [AuditReport]  
   actionPlans(id: Int): [ActionPlan]  
 }
-type Mutation {
-  addUnit(input: UnitInput): Unit
-  updateUnit(id: Int, input: UnitInput): Unit
-}
 `;
+
+const mutationDefs = `
+  type Mutation {
+  addUnit(input: UnitInput): Unit
+  updateUnit(id: Int, input: UnitInput): Unit  
+  addAction(input: ActionInput): Action  
+}
+input UnitInput {  
+  name: String    
+}
+input ActionInput {
+  description: String
+  responsible: PersonInput 
+  type: ActionType
+  completionPercentage: Int  
+}
+input PersonInput {
+  firstName: String
+  secondName: String
+  patronymic: String
+}
+`
 
 // @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
-export default makeExecutableSchema({ typeDefs, resolvers: { ... resolvers, Date: GraphQLDate } });
+export default makeExecutableSchema({ typeDefs:[ queryDefs, mutationDefs ], resolvers: { ... resolvers, Date: GraphQLDate } });
