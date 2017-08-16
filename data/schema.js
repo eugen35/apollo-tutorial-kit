@@ -107,4 +107,4 @@ input PersonInput {
 
 // @todo /3/ Встал вопрос, как быть с нормативным документом внешним и внутренним - см. тип NormativeDocument
 
-export default makeExecutableSchema({ typeDefs:[ queryDefs, mutationDefs ], resolvers: { ... resolvers, Date: GraphQLDate } });
+export default makeExecutableSchema({ typeDefs: [queryDefs, mutationDefs], resolvers: { ... resolvers, Date: GraphQLDate } });

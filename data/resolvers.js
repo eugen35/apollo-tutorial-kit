@@ -39,9 +39,7 @@ const resolvers = {
     updateUnit(_, { id, input }) { return Unit.update(input, { where: { id } }); },
     addAction(_, args) { return Action.create(args.input); },
   },
-  ActionInput: {
-    responsible(action, args) { return action.setPerson(args.responsible); },
-  },
+
 };
 
 export default resolvers;
