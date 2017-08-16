@@ -40,7 +40,7 @@ const resolvers = {
     addAction(_, args) { return Action.create(args.input); },
   },
   ActionInput: {
-    responsible(action,args) { return action.setPerson(args.responsible); },
+    responsible(action, args) { return action.setPerson(args.responsible); },
   },
 };
 
