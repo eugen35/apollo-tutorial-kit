@@ -38,18 +38,28 @@ const resolvers = {
   Mutation: {
     addUnit(_, args) { return Unit.create(args.input); },
     updateUnit(_, { id, input }) { return Unit.update(input, { where: { id } }); },
-    addAction(_, args) { return Action.create(args.input).then((action) => addResponsible(action, args.input.responsible)); },
+    addAction(_, args) { return Action.create(args.input).then((action) => mutationResolverAnalogs.AddAction.addResponsible(action, args.input.responsible)); },
+    addActionPlan(_, args) { return ActionPlan.create(args.input).then((actionPlan) => mutationResolverAnalogs.AddActionPlan.addActions(actionPlan, args.input.actions)); },
   },
-
 };
 
-function addResponsible(action, args) {
-  console.log('way');
-  console.log(args);
-  return Person.create(args).then((person) => {
-    action.setPerson(person);
-    return action; // Возвращать нужно всегда объект, который обещали вернуть по схеме
-  });
-}
+const mutationResolverAnalogs = {
+  AddAction: {
+    addResponsible(action, args) {
+      return Person.create(args).then((person) => {
+        return action.setPerson(person); // Возвращать нужно всегда объект, который обещали вернуть по схеме
+      });
+    },
+  },
+  AddActionPlan: {
+    addActions(actionPlan, args) {
+      return Action.bulkCreate(args).then((actions) => { // Создаём массив из объектов action
+        return actionPlan.setActions(actions); // Возвращать нужно всегда объект, который обещали вернуть по схеме
+      });
+    },
+  },
+};
+
+
 
 export default resolvers;

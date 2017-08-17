@@ -84,10 +84,11 @@ type Query {
 `;
 
 const mutationDefs = `
-  type Mutation {
+type Mutation {
   addUnit(input: UnitInput): Unit
   updateUnit(id: Int, input: UnitInput): Unit  
   addAction(input: ActionInput): Action  
+  addActionPlan(input: ActionPlanInput): ActionPlan  
 }
 input UnitInput {  
   name: String    
@@ -97,6 +98,11 @@ input ActionInput {
   responsible: PersonInput 
   type: ActionType
   completionPercentage: Int  
+}
+input ActionPlanInput {
+  actions:[ActionInput]
+  isApproved: Boolean
+  approvalDate: Date  
 }
 input PersonInput {
   firstName: String
