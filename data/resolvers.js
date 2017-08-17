@@ -54,7 +54,7 @@ const mutationResolverAnalogs = {
   AddActionPlan: {
     addActions(actionPlan, args) {
       return Action.bulkCreate(args).then((actions) => { // Создаём массив из объектов action
-        return actionPlan.setActions(actions); // Возвращать нужно всегда объект, который обещали вернуть по схеме
+        return Promise.all(actions.map((action, i) => mutationResolverAnalogs.AddAction.addResponsible(action, args[i].responsible))).then((actionsWithResponsibles) => actionPlan.setActions(actionsWithResponsibles));
       });
     },
   },
