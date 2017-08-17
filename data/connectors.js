@@ -55,7 +55,6 @@ Action.belongsTo(Person);
 AuditReport.hasMany(Observation);
 ActionPlan.hasMany(Action);
 
+// seedDb(db); // Теперь сидю db однократно, когда мне нужно через запуск npm run seeddb
 
-seedDb(db);
-
-module.exports = db.models;
+export default db;

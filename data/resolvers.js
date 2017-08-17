@@ -1,4 +1,5 @@
-import { Observation, Unit, Person, AuditReport, ActionPlan, Action } from './connectors';
+import db from './connectors';
+const { Observation, Unit, Person, AuditReport, ActionPlan, Action } = db.models;
 
 const resolvers = {
   Query: {
@@ -37,9 +38,15 @@ const resolvers = {
   Mutation: {
     addUnit(_, args) { return Unit.create(args.input); },
     updateUnit(_, { id, input }) { return Unit.update(input, { where: { id } }); },
-    addAction(_, args) { return Action.create(args.input); },
+    addAction(_, args) { return Action.create(args.input).then(addResponsible); },
   },
 
 };
+
+function addResponsible(action){
+  console.log('------------ДОБАВЛЯЮТ');
+  console.log(action);
+  return action; // Возвращать нужно всегда объект, который обещали вернуть по схеме
+}
 
 export default resolvers;
