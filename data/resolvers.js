@@ -38,15 +38,18 @@ const resolvers = {
   Mutation: {
     addUnit(_, args) { return Unit.create(args.input); },
     updateUnit(_, { id, input }) { return Unit.update(input, { where: { id } }); },
-    addAction(_, args) { return Action.create(args.input).then(addResponsible); },
+    addAction(_, args) { return Action.create(args.input).then((action) => addResponsible(action, args.input.responsible)); },
   },
 
 };
 
-function addResponsible(action){
-  console.log('------------ДОБАВЛЯЮТ');
-  console.log(action);
-  return action; // Возвращать нужно всегда объект, который обещали вернуть по схеме
+function addResponsible(action, args) {
+  console.log('way');
+  console.log(args);
+  return Person.create(args).then((person) => {
+    action.setPerson(person);
+    return action; // Возвращать нужно всегда объект, который обещали вернуть по схеме
+  });
 }
 
 export default resolvers;
