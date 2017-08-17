@@ -16,11 +16,11 @@ Examples of mutations:
 
 2 levels:
 ```
-mutation {addActionPlan(input:{isApproved: false, actions:[
-  {description: "????", responsible: {firstName: "John"}}, {description: "???", responsible: {firstName: "Ivan"}},
-]})
-  {id isApproved actions {description responsible {firstName}}}
-}
+mutation {addAction(input:{
+  description:"+++++++++repa112-------------",
+  type: BLOCKING_ACTION
+  responsible: {firstName: "++++++++++------------Va12221sya"}
+}){description id type responsible {firstName}}}
 ```
 
 3 levels:
