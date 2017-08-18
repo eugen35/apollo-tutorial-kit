@@ -1,7 +1,7 @@
 {
-  "name": "apollo-starter-kit",
+  "name": "mutations-based-on-apollo-starter-kit",
   "version": "0.1.0",
-  "description": "Minimal set of code to write a GraphQL server with Apollo graphql-tools",
+  "description": "Minimal set of code to write a GraphQL server with Apollo graphql-tools and with NESTED MUTATIONS",
   "scripts": {
     "start": "nodemon ./server.js --exec babel-node",
     "seeddb": "babel-node ./data/seedFromConsole.js",
@@ -10,22 +10,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apollostack/apollo-starter-kit.git"
+    "url": "git+https://github.com/eugen35/apollo-tutorial-kit.git"
   },
   "keywords": [
     "Node.js",
     "Javascript",
     "GraphQL",
     "Express",
-    "Apollo",
-    "Meteor"
+    "Apollo"
   ],
-  "author": "Jonas Helfer <jonas@helfer.email>",
+  "author": "_meugen_ <eugen35@mail.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apollostack/apollo-starter-kit/issues"
+    "url": "https://github.com/eugen35/apollo-tutorial-kit.git/issues"
   },
-  "homepage": "https://github.com/apollostack/apollo-starter-kit#readme",
+  "homepage": "https://github.com/eugen35/apollo-tutorial-kit.git#readme",
   "dependencies": {
     "apollo-server-express": "1.0.2",
     "body-parser": "^1.17.2",
